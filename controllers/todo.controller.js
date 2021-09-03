@@ -26,7 +26,6 @@ export const Alltodo = async (req, res) => {
         });
 };
 
-
 export const todo = async (req, res) => {
     TodoModel.findById(req.params.id)
         .then((doc) => {
@@ -39,8 +38,6 @@ export const todo = async (req, res) => {
             res.send({ message: err.message });
         });
 };
-
-
 
 export const updatetodo = async (req, res) => {
     const { name, status, todotitle, category } = req.body;
@@ -59,7 +56,6 @@ export const updatetodo = async (req, res) => {
     }
 };
 
-
 export const deletetodo = async (req, res) => {
     const { id } = req.params;
     const userExist = await TodoModel.findById(req.params.id);
@@ -70,6 +66,3 @@ export const deletetodo = async (req, res) => {
 
     res.json({ message: "Todo deleted successfully." });
 };
-
-
-//export default createtodo
