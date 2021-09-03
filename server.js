@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import MONGODB_URL from "./dbConfig.js";
-import usersRoutes from "./routes/user.route.js";
+import todosRoutes from "./routes/todo.route.js";
 
 const app = express()
 
@@ -15,11 +15,8 @@ mongoose.connection.on("connected", () => {
   });
   
 
-  //Middleware
-app.use(express.json());
+app.use(express.json());  // Middleware
 
-app.use('/user', usersRoutes);
-
-
+app.use("/todo", todosRoutes);
 
 app.listen(4000, ()=> console.log("Server has started"))
