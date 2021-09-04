@@ -34,5 +34,4 @@ export const user = async (req, res) => {
     });
 };
 
-
 export default newUser
