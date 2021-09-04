@@ -1,4 +1,3 @@
-
 import TodoModel from "../models/todo.model.js";
 //create new todo
 export const createtodo = async (req, res) => {
@@ -68,7 +67,6 @@ export const deletetodo = async (req, res) => {
 };
 
 // fetch by category (all data which has category)
-
 export const category = async (req, res) => {
 
     TodoModel.find({ category: { $exists: true, $ne: null } })
@@ -84,7 +82,6 @@ export const category = async (req, res) => {
 };
 
 // fetch all data by category type
-
 export const categoryname = async (req, res) => {
 
     var query = req.params.query;
@@ -103,7 +100,6 @@ export const categoryname = async (req, res) => {
 };
 
 // fetch by todo title (all data which has title)
-
 export const todotitle = async (req, res) => {
 
     TodoModel.find({ todotitle: { $exists: true, $ne: null } })
@@ -120,7 +116,6 @@ export const todotitle = async (req, res) => {
 };
 
 // fetch all data by todo title type
-
 export const todotitlename = async (req, res) => {
 
     var query = req.params.query;
