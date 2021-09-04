@@ -11,6 +11,8 @@ const app = express()
 
 app.use(express.json());  // Middleware
 
-app.use("/todo", todosRoutes);
+app.use("/todo", todosRoutes);      //For todo Route
+app.use('/user', usersRoutes);      //For User Route
+
 
 app.listen(PORT,console.log(`Server listening on ${PORT}`))
