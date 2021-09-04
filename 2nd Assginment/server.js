@@ -2,9 +2,7 @@ import express from "express";
 import Connct_Mongo_DB from "./dbConfig.js";
 import todosRoutes from "./routes/todo.route.js";
 
-
 const PORT = process.env.PORT || 4040;
-
 
 // Initialisation of Mongodb connection
 Connct_Mongo_DB();
