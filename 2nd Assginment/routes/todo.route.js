@@ -1,6 +1,5 @@
 import express from "express";
-
-const router = express.Router();
+const router = express.Router();    //Router 
 const app = express();
 app.use(express.json());
 
@@ -16,7 +15,7 @@ import {
   todotitlename
 } from "../controllers/todo.controller.js";
 
-router.post("/add", createtodo);                           //Add todos
+router.post("/add", createtodo);                           // Add todos
 router.get("/alltodos", Alltodo);                          // Get all todos
 router.get("/todo/:id", todobyid);                         // get todos by id
 router.patch("/update/:id", updatetodo);                   // update by id
