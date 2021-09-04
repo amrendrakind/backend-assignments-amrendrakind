@@ -1,6 +1,7 @@
 import express from "express";
 import Connct_Mongo_DB from "./dbConfig.js";
 import todosRoutes from "./routes/todo.route.js";
+import usersRoutes from "./routes/user.route.js";
 
 const PORT = process.env.PORT || 4040;
 
