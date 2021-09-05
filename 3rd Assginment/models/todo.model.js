@@ -29,11 +29,11 @@ const TodoSchema = mongoose.Schema(
       default: Date.now
   },
 
-  writeConcern: {
-    w: 'majority',
-    j: true,
-    wtimeout: 1000
-  }
+  // writeConcern: {
+  //   w: 'majority',
+  //   j: true,
+  //   wtimeout: 1000
+  // }
 
   },
   { timestamps: true }

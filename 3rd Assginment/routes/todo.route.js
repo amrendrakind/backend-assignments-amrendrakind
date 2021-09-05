@@ -9,6 +9,7 @@ import {
   todoByid,
   updateTodo,
   deleteTodo,
+  deleteAllTodo,
   category,
   categoryName,
   todoTitle,
@@ -20,6 +21,7 @@ router.get("/alltodos", allTodo);                          // Get all todos
 router.get("/todo/:id", todoByid);                         // get todos by id
 router.patch("/update/:id", updateTodo);                   // update by id
 router.delete("/delete/:id", deleteTodo);                  // delete by id 
+router.delete("/deleteall/", deleteAllTodo);                  // delete by id 
 router.get("/category", category);                         // get todos by all todo Category 
 router.get("/category/:query", categoryName);              // get todos by Category type
 router.get("/title", todoTitle);                           // get todos by all todo title
