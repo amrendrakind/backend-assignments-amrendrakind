@@ -20,15 +20,18 @@ const userSchema = new mongoose.Schema({
           },
           message: props => `${props.value} is not a valid phone number!`
     },
-    role : {
-        type : String,
-        enum :['admin','user'],
-        default : 'user'
-    },
     password : {
         type : String,
         required : [true, 'Password can not be blank!'],
         minlength : 6,
+    },
+    role : {
+        type : String,
+        enum :['admin','appuser'],
+        default : 'user'
+    },
+    accessToken: {
+        type: String,
     },
     createdAt :{
         type : Date,

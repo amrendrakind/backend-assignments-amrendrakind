@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 const TodoSchema = mongoose.Schema(
   {
     userName: {
-//     type: String,
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
     },

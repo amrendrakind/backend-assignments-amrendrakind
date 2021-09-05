@@ -37,6 +37,27 @@ export const todoByid = async (req, res) => {
             res.send({ message: err.message });
         });
 };
+
+// Search todo by user
+
+export const todoByUser = async (req, res) => {
+
+    var query = req.params.query;
+    TodoModel.find({
+        'userName': query
+    }, function (err, result) {
+        if (err) throw err;
+        if (result) {
+            res.json(result)
+        } else {
+            res.send(JSON.stringify({
+                error: 'Error'
+            }))
+        }
+    })
+};
+
+
 //updating to do
 export const updateTodo = async (req, res) => {
     const { userName, status, todoTitle, category } = req.body;
@@ -75,7 +96,6 @@ export const deleteAllTodo = async (req, res) => {
     res.json({ message: "All Todos deleted successfully." });
     
 };
-
 
 // fetch by category (all data which has category)
 export const category = async (req, res) => {

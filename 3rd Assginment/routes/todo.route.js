@@ -7,6 +7,7 @@ import {
   createTodo,
   allTodo,
   todoByid,
+  todoByUser,
   updateTodo,
   deleteTodo,
   deleteAllTodo,
@@ -19,6 +20,9 @@ import {
 router.post("/add", createTodo);                           // Add todos
 router.get("/alltodos", allTodo);                          // Get all todos
 router.get("/todo/:id", todoByid);                         // get todos by id
+
+router.get("/user/:query", todoByUser);                         // get todos by user
+
 router.patch("/update/:id", updateTodo);                   // update by id
 router.delete("/delete/:id", deleteTodo);                  // delete by id 
 router.delete("/deleteall/", deleteAllTodo);                  // delete by id 

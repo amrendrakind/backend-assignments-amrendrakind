@@ -1,5 +1,10 @@
 
 import User from "../models/user.model.js";
+import TodoModel from "../models/todo.model.js";
+
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 // New user cration
 export const newUser = async (req, res) => {
   try {
@@ -32,6 +37,29 @@ export const userid = async (req, res) => {
     .catch((err) => {
       res.send({ message: err.message });
     });
+};
+
+// Search todo by user
+
+export const userTodo = async (req, res) => {
+  
+  var query = req.params.query;
+  
+  User.find({'username': query})
+  .select("_id")
+  .then((doc) => {
+    if (!doc) {
+      return res.status(404).json("User not available");
+    }
+    return res.status(200).json(doc);
+  })
+  .catch((err) => {
+    res.send({ message: err.message });
+  })
+
+  console.log("User id is ",res.body.id )  
+
+
 };
 
 export default newUser
