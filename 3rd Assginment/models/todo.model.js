@@ -18,7 +18,10 @@ const TodoSchema = mongoose.Schema(
       default: "Just Started"
     },
     category: { 
-      type: String 
+      type: String,
+      enum :['work','hobby','task','Work','Hobby','Task'],
+      default : 'hobby'
+
     },
   createdAt :{
       type : Date,
@@ -28,12 +31,6 @@ const TodoSchema = mongoose.Schema(
       type: Date,
       default: Date.now
   },
-
-  // writeConcern: {
-  //   w: 'majority',
-  //   j: true,
-  //   wtimeout: 1000
-  // }
 
   },
   { timestamps: true }
