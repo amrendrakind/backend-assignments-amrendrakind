@@ -1,6 +1,6 @@
 import TodoModel from "../models/todo.model.js";
 //create new todo
-export const createtodo = async (req, res) => {
+export const createTodo = async (req, res) => {
     try {
         const newtodo = new TodoModel(req.body);
         newtodo.save();
@@ -10,10 +10,10 @@ export const createtodo = async (req, res) => {
     }
 };
 //fetch all todos
-export const Alltodo = async (req, res) => {
+export const allTodo = async (req, res) => {
 
     TodoModel.find()
-        // .select("username todotitle status category")
+        // .select("userName todoTitle status category")
         // .exec()
         .then((data) => {
             res.status(200).json(data);
@@ -25,7 +25,7 @@ export const Alltodo = async (req, res) => {
         });
 };
 //search todo by id
-export const todobyid = async (req, res) => {
+export const todoByid = async (req, res) => {
     TodoModel.findById(req.params.id)
         .then((doc) => {
             if (!doc) {
@@ -38,16 +38,16 @@ export const todobyid = async (req, res) => {
         });
 };
 //updating to do
-export const updatetodo = async (req, res) => {
-    const { username, status, todotitle, category } = req.body;
+export const updateTodo = async (req, res) => {
+    const { userName, status, todoTitle, category } = req.body;
     const userExist = await TodoModel.findById(req.params.id);
     if (userExist) {
         const key = userExist._id;
         const updateuser = new TodoModel({ status, category });
         TodoModel.findByIdAndUpdate(key, {
-            username: req.body.username,
+            userName: req.body.userName,
             status: req.body.status,
-            todotitle: req.body.todotitle,
+            todoTitle: req.body.todoTitle,
             category: req.body.category,
         }).then(() => {
             res.status(200).json({ message: "Todo updated.." });
@@ -55,7 +55,7 @@ export const updatetodo = async (req, res) => {
     }
 };
 //Delete todos by id
-export const deletetodo = async (req, res) => {
+export const deleteTodo = async (req, res) => {
     const { id } = req.params;
     const userExist = await TodoModel.findById(req.params.id);
     if (!userExist)
@@ -82,7 +82,7 @@ export const category = async (req, res) => {
 };
 
 // fetch all data by category type
-export const categoryname = async (req, res) => {
+export const categoryName = async (req, res) => {
 
     var query = req.params.query;
     TodoModel.find({
@@ -100,9 +100,9 @@ export const categoryname = async (req, res) => {
 };
 
 // fetch by todo title (all data which has title)
-export const todotitle = async (req, res) => {
+export const todoTitle = async (req, res) => {
 
-    TodoModel.find({ todotitle: { $exists: true, $ne: null } })
+    TodoModel.find({ todoTitle: { $exists: true, $ne: null } })
         .sort( {createdAt :1})                  //Sort data by creation time stamp 
         .then((doc) => {
             if (!doc) {
@@ -116,11 +116,11 @@ export const todotitle = async (req, res) => {
 };
 
 // fetch all data by todo title type
-export const todotitlename = async (req, res) => {
+export const todoTitleName = async (req, res) => {
 
     var query = req.params.query;
     TodoModel.find({
-        'todotitle': query
+        'todoTitle': query
     }, function (err, result) {
         if (err) throw err;
         if (result) {

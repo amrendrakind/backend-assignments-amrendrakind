@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 const TodoSchema = mongoose.Schema(
   {
-    username: {
-//      type: String,
+    userName: {
+//     type: String,
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
     },
-    todotitle: {
+    todoTitle: {
       type: String,
     },
     isComplete:{
@@ -27,7 +27,14 @@ const TodoSchema = mongoose.Schema(
   updatedAt: {
       type: Date,
       default: Date.now
+  },
+
+  writeConcern: {
+    w: 'majority',
+    j: true,
+    wtimeout: 1000
   }
+
   },
   { timestamps: true }
 );

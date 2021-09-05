@@ -38,11 +38,6 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    // writeConcern: {
-    //     w: 'majority',
-    //     j: true,
-    //     wtimeout: 1000
-    //   }
 },
 {timeStamps:true});
 
