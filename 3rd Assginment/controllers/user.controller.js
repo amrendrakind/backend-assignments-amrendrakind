@@ -22,7 +22,7 @@ export const allUsers = async (req, res) => {
 };
 // search user by id
 export const userid = async (req, res) => {
-  userid.findById(req.params.id)
+  User.findById(req.params.id)
     .then((doc) => {
       if (!doc) {
         return res.status(404).json("User not available");

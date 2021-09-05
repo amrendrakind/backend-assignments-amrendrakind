@@ -8,6 +8,6 @@ import {newUser, allUsers, userid} from "../controllers/user.controller.js";
 
 router.post('/createuser', newUser);
 router.get('/alluser', allUsers);
-router.get('/user/:id',userid);
+router.get('/userid/:id',userid);
 
 export default router
