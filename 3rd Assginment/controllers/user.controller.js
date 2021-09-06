@@ -1,8 +1,5 @@
 import User from "../models/user.model.js";
 import TodoModel from "../models/todo.model.js";
-// import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
-
 // New user cration
 export const newUser = async (req, res) => {
   try {
@@ -43,7 +40,7 @@ export const userTodo = async (req, res) => {
   
   var query = req.params.query;
    await User.findOne({_id: query})
-      .populate('todo')
+      .populate("todo")
       .exec()
     .then((doc) => {
       if (!doc) {
