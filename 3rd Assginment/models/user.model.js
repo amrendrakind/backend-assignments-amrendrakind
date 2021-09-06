@@ -41,6 +41,11 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    todo :[{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "TodoModel"
+    }],
+
 },
 {timeStamps:true});
 

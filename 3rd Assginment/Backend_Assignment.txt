@@ -16,7 +16,7 @@ Environment	Framework
 Backend APIs	Express Js
 Database	MongoDB
 ORM/ODM	Mongoose
-//Done
+1.//Done
 
 Backend Assignment
 TODO List with filtering
@@ -31,8 +31,7 @@ Environment	Framework
 Backend APIs	Express Js
 Database	MongoDB
 ORM/ODM	Mongoose
-//Doing
-
+2.//Done
 
 Backend Assignment
 TODO List for Users
@@ -54,6 +53,8 @@ Environment	Framework
 Backend APIs	Express Js
 Database	MongoDB
 ORM/ODM	Mongoose
+//3. Doing
+
 
 Backend Assignment
 TODO List with Authentication
