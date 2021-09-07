@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router();
-const app = express();
-app.use(express.json());
 
 const {  createTodo,
   allTodo,
@@ -15,19 +13,6 @@ const {  createTodo,
   todoTitle,
   todoTitleName
 } = require('../controllers/todo.controller.js')
-// import {
-//   createTodo,
-//   allTodo,
-//   todoByid,
-//   todoByUser,
-//   updateTodo,
-//   deleteTodo,
-//   deleteAllTodo,
-//   category,
-//   categoryName,
-//   todoTitle,
-//   todoTitleName
-// } from "../controllers/todo.controller.js";
 
 router.post("/add", createTodo);                           // Add todos
 router.get("/alltodos", allTodo);                          // Get all todos
