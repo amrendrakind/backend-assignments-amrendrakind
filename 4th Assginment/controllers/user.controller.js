@@ -1,7 +1,7 @@
-import User from "../models/user.model.js";
-import TodoModel from "../models/todo.model.js";
+const User = require('../models/user.model.js')
+
 // New user cration
-export const newUser = async (req, res) => {
+module.exports.newUser = async (req, res) => {
   try {
     const newuser = new User(req.body);
     newuser.save();
@@ -11,7 +11,7 @@ export const newUser = async (req, res) => {
   }
 }
 // fetching all users data
-export const allUsers = async (req, res) => {
+module.exports.allUsers = async (req, res) => {
   User.find()
     .then((user) => {
       res.json({ user });
@@ -21,7 +21,7 @@ export const allUsers = async (req, res) => {
     });
 };
 // search user by id
-export const userid = async (req, res) => {
+module.exports.userid = async (req, res) => {
   User.findById(req.params.id)
     .then((doc) => {
       if (!doc) {
@@ -36,7 +36,7 @@ export const userid = async (req, res) => {
 
 // Search todo by user
 
-export const userTodo = async (req, res) => {
+module.exports.userTodo = async (req, res) => {
   
   var query = req.params.query;
    await User.findOne({_id: query})
@@ -53,5 +53,3 @@ export const userTodo = async (req, res) => {
     });
   
 };
-
-export default newUser

@@ -1,6 +1,7 @@
-import TodoModel from "../models/todo.model.js";
+const TodoModel = require('../models/todo.model.js')
+//import TodoModel from "../models/todo.model.js";
 //create new todo
-export const createTodo = async (req, res) => {
+module.exports.createTodo = async (req, res) => {
     try {
         const newtodo = new TodoModel(req.body);
         newtodo.save();
@@ -10,7 +11,7 @@ export const createTodo = async (req, res) => {
     }
 };
 //fetch all todos
-export const allTodo = async (req, res) => {
+module.exports.allTodo = async (req, res) => {
 
     TodoModel.find()
         // .select("userName todoTitle status category")
@@ -25,7 +26,7 @@ export const allTodo = async (req, res) => {
         });
 };
 //search todo by id
-export const todoByid = async (req, res) => {
+module.exports.todoByid = async (req, res) => {
     TodoModel.findById(req.params.id)
         .then((doc) => {
             if (!doc) {
@@ -40,7 +41,7 @@ export const todoByid = async (req, res) => {
 
 // Search todo by user
 
-export const todoByUser = async (req, res) => {
+module.exports.todoByUser = async (req, res) => {
 
     var query = req.params.query;
     TodoModel.find({
@@ -59,7 +60,7 @@ export const todoByUser = async (req, res) => {
 
 
 //updating to do
-export const updateTodo = async (req, res) => {
+module.exports.updateTodo = async (req, res) => {
     const { userName, status, todoTitle, category } = req.body;
     const userExist = await TodoModel.findById(req.params.id);
     if (userExist) {
@@ -76,7 +77,7 @@ export const updateTodo = async (req, res) => {
     }
 };
 //Delete todos by id
-export const deleteTodo = async (req, res) => {
+module.exports.deleteTodo = async (req, res) => {
     const { id } = req.params;
     const userExist = await TodoModel.findById(req.params.id);
     //console.log(TodoModel.count())
@@ -91,14 +92,14 @@ export const deleteTodo = async (req, res) => {
 
 
 //Delete all todos
-export const deleteAllTodo = async (req, res) => {
+module.exports.deleteAllTodo = async (req, res) => {
     await TodoModel.deleteMany({});
     res.json({ message: "All Todos deleted successfully." });
     
 };
 
 // fetch by category (all data which has category)
-export const category = async (req, res) => {
+module.exports.category = async (req, res) => {
 
     TodoModel.find({ category: { $exists: true, $ne: null } })
         .then((doc) => {
@@ -113,7 +114,7 @@ export const category = async (req, res) => {
 };
 
 // fetch all data by category type
-export const categoryName = async (req, res) => {
+module.exports.categoryName = async (req, res) => {
 
     var query = req.params.query;
     TodoModel.find({
@@ -131,7 +132,7 @@ export const categoryName = async (req, res) => {
 };
 
 // fetch by todo title (all data which has title)
-export const todoTitle = async (req, res) => {
+module.exports.todoTitle = async (req, res) => {
 
     TodoModel.find({ todoTitle: { $exists: true, $ne: null } })
         .sort( {createdAt :1})                  //Sort data by creation time stamp 
@@ -147,7 +148,7 @@ export const todoTitle = async (req, res) => {
 };
 
 // fetch all data by todo title type
-export const todoTitleName = async (req, res) => {
+module.exports.todoTitleName = async (req, res) => {
 
     var query = req.params.query;
     TodoModel.find({
@@ -163,3 +164,4 @@ export const todoTitleName = async (req, res) => {
         }
     })
 };
+

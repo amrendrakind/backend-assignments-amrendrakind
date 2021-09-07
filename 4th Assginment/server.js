@@ -1,22 +1,44 @@
-import express from "express";
-import Connct_Mongo_DB from "./dbConfig.js";
-import todosRoutes from "./routes/todo.route.js";
-import usersRoutes from "./routes/user.route.js";
-import bodyParser from "body-parser"
-
-
-const PORT = process.env.PORT || 4040;
+const dotenv = require('dotenv')
+const express = require('express')
+const app = express()
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
+const userLoginRouter = require('./routes/userLogin.route.js')
+const Connct_Mongo_DB = require('./config/dbConfig.js')
+const todosRoutes = require('./routes/todo.route.js')
+const usersRoutes =require('./routes/user.route.js')
+const bodyParser = require('body-parser')
 
 // Initialisation of Mongodb connection
 Connct_Mongo_DB();
 
-const app = express()
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config()
+}
+const PORT = process.env.SERVER_PORT || 4040
 
+app.set('view-engine', 'ejs')
+app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-app.use(express.json());  // Middleware
+app.use(express.json());  
+app.use(flash())
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
 
-app.use("/todo", todosRoutes);      //For todo Route
-app.use('/user', usersRoutes);      //For User Route
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
 
+//Routes
 
-app.listen(PORT,console.log(`Server listening on ${PORT}`))
+app.use('/user', userLoginRouter)           // Routes Login Webpage 
+
+app.use("/todo", todosRoutes);      //For todo Router Database
+app.use('/user', usersRoutes);      //For User Router Database
+
+app.listen(PORT, console.log(`server is running on port ${PORT}`))

@@ -1,6 +1,5 @@
-import dotenv from "dotenv"
-import mongoose from "mongoose";
-dotenv.config()
+const dotenv =require('dotenv').config()
+const mongoose = require('mongoose')
 
 const MONGODB_URI = process.env.DATABASE_URL 
 
@@ -15,4 +14,4 @@ const connectDB = async () => {
         console.log("MongoDB Atlas Server is connected");
     });
 }
-export default connectDB;
+module.exports = connectDB;

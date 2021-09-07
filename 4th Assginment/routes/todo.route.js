@@ -1,10 +1,9 @@
-import express from "express";
-const router = express.Router();    //Router 
+const express = require('express')
+const router = express.Router();
 const app = express();
 app.use(express.json());
 
-import {
-  createTodo,
+const {  createTodo,
   allTodo,
   todoByid,
   todoByUser,
@@ -15,7 +14,20 @@ import {
   categoryName,
   todoTitle,
   todoTitleName
-} from "../controllers/todo.controller.js";
+} = require('../controllers/todo.controller.js')
+// import {
+//   createTodo,
+//   allTodo,
+//   todoByid,
+//   todoByUser,
+//   updateTodo,
+//   deleteTodo,
+//   deleteAllTodo,
+//   category,
+//   categoryName,
+//   todoTitle,
+//   todoTitleName
+// } from "../controllers/todo.controller.js";
 
 router.post("/add", createTodo);                           // Add todos
 router.get("/alltodos", allTodo);                          // Get all todos
@@ -31,4 +43,5 @@ router.get("/category/:query", categoryName);              // get todos by Categ
 router.get("/title", todoTitle);                           // get todos by all todo title
 router.get("/title/:query", todoTitleName);                // get todos by todo title name
 
-export default router;
+//export default router;
+module.exports = router
