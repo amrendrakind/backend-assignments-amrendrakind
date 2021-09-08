@@ -1,6 +1,6 @@
 const User = require('../models/user.model.js')
 const TodoModel = require('../models/todo.model.js')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
@@ -40,9 +40,7 @@ const userControl = {
                   if (!user) {
                       return res.status(404).send({ message: "User Not found." });
                   }
-
                   var passwordIsValid = bcrypt.compareSync( req.body.password, user.password );
-
                   if (!passwordIsValid) {
                       return res.status(401).send({
                           accessToken: null,
@@ -64,7 +62,7 @@ const userControl = {
 
                   res.status(200).send({
                       accessToken: token,
-                      user: {user:user.username, role: authorities}
+                      user: {name:user.username, email: user.email, role: authorities}
                   });
               });
 
