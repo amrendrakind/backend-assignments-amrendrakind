@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-
+const mongoose = require('mongoose');
+const {ObjectId} = mongoose.Schema.Types;
 const userSchema = new mongoose.Schema({
     username : {
         type: String,
-        required:true,
+        required: [true,"Please enter your name"],
         unique:true,
         trim:true
     },
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     role : {
         type : String,
         enum :['admin','appuser'],
-        default : 'user'
+        default : 'appuser'
     },
     accessToken: {
         type: String,
@@ -41,12 +41,11 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    todo :[{
-        type : mongoose.Schema.Types.ObjectId,
+    todo : [{
+        type : ObjectId,
         ref : "TodoModel"
-    }],
+    }]
 
-},
-{timeStamps:true});
+});
 
 module.exports = mongoose.model("User", userSchema);

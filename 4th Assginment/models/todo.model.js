@@ -3,7 +3,7 @@ const TodoSchema = mongoose.Schema(
   {
     userName: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: "User",
     },
     todoTitle: {
       type: String,
@@ -31,7 +31,6 @@ const TodoSchema = mongoose.Schema(
       default: Date.now
   },
 
-  },
-  { timestamps: true }
-);
+  });
+  
 module.exports = mongoose.model("TodoModel", TodoSchema);

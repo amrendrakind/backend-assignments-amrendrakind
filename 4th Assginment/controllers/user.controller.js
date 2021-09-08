@@ -1,4 +1,5 @@
 const User = require('../models/user.model.js')
+const TodoModel = require('../models/todo.model.js')
 
 // New user cration
 module.exports.newUser = async (req, res) => {
@@ -39,17 +40,18 @@ module.exports.userid = async (req, res) => {
 module.exports.userTodo = async (req, res) => {
   
   var query = req.params.query;
-   await User.findOne({_id: query})
-      .populate("todo")
-      .exec()
+  const userForTodo= await User.findOne({username:query})
+  console.log(userForTodo._id.toString())
+  await TodoModel.find({userName: userForTodo._id.toString()})
+    .select("userName category todoTitle isComplete status")
+    .exec()
     .then((doc) => {
       if (!doc) {
-        return res.status(404).json("User not available");
+        return res.status(404).json("User not available in Todo List");
       }
       return res.status(200).json(doc);
     })
     .catch((err) => {
       res.send({ message: err.message });
     });
-  
 };

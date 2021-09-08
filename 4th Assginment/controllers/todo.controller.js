@@ -1,5 +1,4 @@
 const TodoModel = require('../models/todo.model.js')
-//import TodoModel from "../models/todo.model.js";
 //create new todo
 module.exports.createTodo = async (req, res) => {
     try {
