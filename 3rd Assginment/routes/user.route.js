@@ -6,12 +6,11 @@ app.use(express.json());
 
 import {newUser, allUsers, userid, userTodo}  from "../controllers/user.controller.js";
 
-router.post('/createuser', newUser);
-router.get('/alluser', allUsers);
-router.get('/userid/:id',userid);
+router.post('/createuser', newUser);        // Create new User
+router.get('/alluser', allUsers);           // List all users
+router.get('/userid/:id',userid);           // List user by id
 
-router.get('/usertodo/:query',userTodo);
-
+router.get('/usertodo/:query',userTodo);    //Searches todo list data by user name based on User Role.
 
 
 export default router

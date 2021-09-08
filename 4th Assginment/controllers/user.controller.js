@@ -57,16 +57,14 @@ const userControl = {
 
                   if (user.role === 'admin') {
 
-                      authorities="User Admin";
+                      authorities="Admin";
                   } else if (user.role === 'user') {
                       authorities = "User"
                   }
 
-
                   res.status(200).send({
                       accessToken: token,
-                      name: user.username,
-                      role: authorities,
+                      user: {user:user.username, role: authorities}
                   });
               });
 
@@ -74,8 +72,6 @@ const userControl = {
           return res.status(500).json({ msg: err.message });
       }
   },
-
-
 
   getAllUsers: async (req, res) => {
       try {

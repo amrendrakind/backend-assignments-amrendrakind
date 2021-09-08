@@ -34,24 +34,46 @@ export const userid = async (req, res) => {
     });
 };
 
-// Search todo by user
+// Role based Search  of todo list by user
 
 export const userTodo = async (req, res) => {
-  
   var query = req.params.query;
-   await User.findOne({_id: query})
-      .populate("todo")
-      .exec()
-    .then((doc) => {
-      if (!doc) {
-        return res.status(404).json("User not available");
-      }
-      return res.status(200).json(doc);
-    })
-    .catch((err) => {
-      res.send({ message: err.message });
-    });
+  const userForTodo= await User.findOne({username:query})
+
+  if(!userForTodo){
+    return res.status(404).json("User not available");
+  }
   
-};
+  if(userForTodo.role==='user'){
+        await TodoModel.find({userName: userForTodo._id.toString()})
+            .select("userName category todoTitle isComplete status")
+            .exec()
+            .then((doc) => {
+            if (!doc) {
+              return res.status(404).json("User not available");
+            }
+            return res.status(200).json(doc);
+          })
+          .catch((err) => {
+            res.send({ message: err.message });
+          });
+        
+      };
+  if(userForTodo.role==='admin'){
+        await TodoModel.find()
+        .select("userName category todoTitle isComplete status")
+        .exec()
+        .then((doc) => {
+        if (!doc) {
+          return res.status(404).json("User not available");
+        }
+        return res.status(200).json(doc);
+      })
+      .catch((err) => {
+        res.send({ message: err.message });
+      });
+    }
+ }
+
 
 export default newUser
