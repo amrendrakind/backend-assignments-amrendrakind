@@ -3,9 +3,11 @@ const jwt = require('jsonwebtoken');
 const jwtAuth = (req,res,next)=>{
 
     const token = req.headers["x-access-token"];
-    // console.log(token)
+
+    console.log("in auth ",token)
+    
     if(!token){
-        return res.status(400).json({msg:"Invalid Authentication"})
+        return res.status(400).json({msg:"Invalid Authentication!"})
     }
     try{
         jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,decoded)=>{

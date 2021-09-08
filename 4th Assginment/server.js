@@ -10,6 +10,7 @@ const Connct_Mongo_DB = require('./config/dbConfig.js')
 const todosRoutes = require('./routes/todo.route.js')
 const usersRoutes =require('./routes/user.route.js')
 const bodyParser = require('body-parser')
+const cors = require('cors');
 
 // Initialisation of Mongodb connection
 Connct_Mongo_DB();
@@ -29,7 +30,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
-
+app.use(cors());
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
@@ -39,6 +40,7 @@ app.use(methodOverride('_method'))
 app.use('/user', userLoginRouter)           // Routes Login Webpage 
 
 app.use("/todo", todosRoutes);      //For todo Router Database
-app.use('/user', usersRoutes);      //For User Router Database
+
+require('./routes/user.route.js')(app)
 
 app.listen(PORT, console.log(`server is running on port ${PORT}`))

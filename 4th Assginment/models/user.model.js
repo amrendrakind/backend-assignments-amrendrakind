@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {ObjectId} = mongoose.Schema.Types;
+const { ObjectId } = mongoose.Schema.Types;
 const userSchema = new mongoose.Schema({
     username : {
         type: String,
@@ -27,8 +27,8 @@ const userSchema = new mongoose.Schema({
     },
     role : {
         type : String,
-        enum :['admin','appuser'],
-        default : 'appuser'
+        enum :['admin','user'],
+        default : 'user'
     },
     accessToken: {
         type: String,

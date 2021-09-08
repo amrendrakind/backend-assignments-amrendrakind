@@ -1,8 +1,8 @@
-// const express = require('express')
-// const router = express.Router()
+const express = require('express')
+const router = express.Router()
 const userOrAdmin = require('../middleware/userOrAdmin.js');
 const jwtAuth = require('../middleware/jwtAuth.js')
-const {newUser, allUsers, userid, userTodo} = require('../controllers/user.controller.js')
+const userControl = require('../controllers/user.controller')
 
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -12,9 +12,11 @@ module.exports = function (app) {
         );
         next();
     })
-    app.post('/createuser',jwtAuth, newUser);
-    router.get('/alluser',jwtAuth, allUsers);
-    router.get('/userid/:id',jwtAuth,userOrAdmin, userid);
-    router.get('/usertodo/:query',jwtAuth, userTodo);
+    app.post('/createuser', userControl.register);
+    app.post('/login/:name', userControl.login);
+    app.get('/alluser/:name',jwtAuth, userControl.getAllUsers);
+
+    // app.get('/userid/:id',jwtAuth, userid);
+    // router.get('/usertodo/:query',jwtAuth, userTodo);
 }
 // module.exports = router
