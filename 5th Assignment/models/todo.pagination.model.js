@@ -36,5 +36,4 @@ const TodoSchema = mongoose.Schema(
   
   TodoSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model("TodoModelP", TodoSchema);
-
+module.exports = mongoose.model("TodoModelP", TodoSchema)(mongoose, mongoosePaginate);

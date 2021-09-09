@@ -15,7 +15,9 @@ const {  createTodo,
 } = require('../controllers/todo.pagination.controller.js')
 
 router.post("/add", createTodo);                           // Add todos
-router.get("/alltodos", allTodo);                          // Get all todos
+
+router.get("/alltodos", allTodo);                          // Get all todos with Pagination
+
 router.get("/todo/:id", todoByid);                         // get todos by id
 
 router.get("/user/:query", todoByUser);                    // get todos by user

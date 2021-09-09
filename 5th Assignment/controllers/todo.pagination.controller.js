@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require('mongoose-paginate-v2');
 
-const TodoModel = require('../models/todo.pagination.model.js')(mongoose,mongoosePaginate)
+const TodoModel = require('../models/todo.pagination.model.js')//(mongoose,mongoosePaginate)
 
 //create new todo
 module.exports.createTodo = async (req, res) => {
@@ -13,7 +13,10 @@ module.exports.createTodo = async (req, res) => {
         res.send({ message: err.message });
     }
 };
+
 //fetch all todos
+
+
 module.exports.allTodo = async (req, res) => {
 
     TodoModel.find()
@@ -28,6 +31,9 @@ module.exports.allTodo = async (req, res) => {
             });
         });
 };
+
+
+
 //search todo by id
 module.exports.todoByid = async (req, res) => {
     TodoModel.findById(req.params.id)
