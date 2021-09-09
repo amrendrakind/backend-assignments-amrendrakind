@@ -16,12 +16,10 @@ const {  createTodo,
 
 router.post("/add", createTodo);                           // Add todos
 
-router.get("/alltodos", allTodo);                          // Get all todos with Pagination
+router.get("/", allTodo);                          // Get all todos with Pagination
 
 router.get("/todo/:id", todoByid);                         // get todos by id
-
 router.get("/user/:query", todoByUser);                    // get todos by user
-
 router.get("/category", category);                         // get todos by all todo Category 
 router.get("/category/:query", categoryName);              // get todos by Category type
 router.get("/title", todoTitle);                           // get todos by all todo title

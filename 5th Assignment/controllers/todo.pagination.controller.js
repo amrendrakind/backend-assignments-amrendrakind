@@ -1,7 +1,14 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require('mongoose-paginate-v2');
 
-const TodoModel = require('../models/todo.pagination.model.js')//(mongoose,mongoosePaginate)
+const TodoModel = require('../models/todo.pagination.model.js')
+
+const getPagination = (page, size) => {
+    const limit = size ? +size : 3;
+    const offset = page ? page * limit : 0;
+  
+    return { limit, offset };
+  };
 
 //create new todo
 module.exports.createTodo = async (req, res) => {
@@ -16,14 +23,30 @@ module.exports.createTodo = async (req, res) => {
 
 //fetch all todos
 
-
 module.exports.allTodo = async (req, res) => {
 
-    TodoModel.find()
+    const { page, size, title } = req.query;
+  
+    var condition = title
+        ? { title: { $regex: new RegExp(title), $options: "i" } }
+        : {};
+
+    const { limit, offset } = getPagination(page, size);
+
+    TodoModel.paginate(condition, { offset, limit })
+
+    // TodoModel.find()
         // .select("userName todoTitle status category")
         // .exec()
         .then((data) => {
-            res.status(200).json(data);
+            // res.status(200).json(data);
+            res.send({
+                totalItems: data.totalDocs,
+                Todo: data.docs,
+                totalPages: data.totalPages,
+                currentPage: data.page - 1,
+            })
+
         })
         .catch((er) => {
             res.status(500).json({
