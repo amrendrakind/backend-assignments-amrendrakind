@@ -20,7 +20,6 @@ const TodoSchema = mongoose.Schema(
       type: String,
       enum :['work','hobby','task','Work','Hobby','Task'],
       default : 'hobby'
-
     },
   createdAt :{
       type : Date,
