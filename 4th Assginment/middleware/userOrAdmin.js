@@ -5,8 +5,6 @@ const userOrAdmin = async (req,res,next)=>{
         const name =req.params.name
         const user = await User.findOne({ username : name })
 
-        console.log("In user or admin ". name)
-
         if(user.role !== 'admin'){
             return res.status(400).json({ msg:`Access denied : ${name} do not have rights.` })
         }

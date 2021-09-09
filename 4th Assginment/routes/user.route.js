@@ -14,7 +14,6 @@ module.exports = function (app) {
     })
     app.post('/createuser', userControl.register);
     app.post('/login/:name', userControl.login);
-    app.get('/alluser/:name', jwtAuth,userControl.getAllUsers);
+    app.get('/alluser/:name', jwtAuth,userOrAdmin,userControl.getAllUsers);
 
 }
-// module.exports = router

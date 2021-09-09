@@ -20,27 +20,27 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const PORT = process.env.SERVER_PORT || 4040
 
-app.set('view-engine', 'ejs')
+app.set('view-engine', 'ejs')               // View Engine for EJS type web pages
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(express.json());  
-app.use(flash())
-app.use(session({
+app.use(flash())                            // Showing of flash messages in Web pages rendered by Express app
+app.use(session({                           //Creation of session for Passport authentication method
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }))
 app.use(cors());
-app.use(passport.initialize())
+app.use(passport.initialize())              
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
 //Routes
 
-app.use('/user', userLoginRouter)           // Routes Login Webpage 
+app.use('/user', userLoginRouter)           // Routes User Login Webpage 
 
-app.use("/todo", todosRoutes);      //For todo Router Database
+app.use("/todo", todosRoutes);              //For todo Router Database
 
-require('./routes/user.route.js')(app)
+require('./routes/user.route.js')(app)      // For user Router Database
 
-app.listen(PORT, console.log(`server is running on port ${PORT}`))
+app.listen(PORT, console.log(`server is running on port ${PORT}`))      //Port listening
