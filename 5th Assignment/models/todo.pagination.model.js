@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
+
 const TodoSchema = mongoose.Schema(
   {
     userName: {
@@ -32,6 +34,7 @@ const TodoSchema = mongoose.Schema(
 
   });
   
+  TodoSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model("TodoModel", TodoSchema);
+module.exports = mongoose.model("TodoModelP", TodoSchema);
 

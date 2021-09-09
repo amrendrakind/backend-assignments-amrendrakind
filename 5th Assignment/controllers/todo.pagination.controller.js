@@ -1,4 +1,8 @@
-const TodoModel = require('../models/todo.pagination.model.js')
+const mongoose = require("mongoose");
+const mongoosePaginate = require('mongoose-paginate-v2');
+
+const TodoModel = require('../models/todo.pagination.model.js')(mongoose,mongoosePaginate)
+
 //create new todo
 module.exports.createTodo = async (req, res) => {
     try {
