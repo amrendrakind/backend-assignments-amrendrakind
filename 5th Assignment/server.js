@@ -8,6 +8,7 @@ const methodOverride = require('method-override')
 const userLoginRouter = require('./routes/userLogin.route.js')
 const Connct_Mongo_DB = require('./config/dbConfig.js')
 const todosRoutes = require('./routes/todo.route.js')
+const todosReportRoutes = require('./routes/todo.pagination.route.js')
 const usersRoutes =require('./routes/user.route.js')
 const bodyParser = require('body-parser')
 const cors = require('cors');
@@ -37,10 +38,11 @@ app.use(methodOverride('_method'))
 
 //Routes
 
-app.use('/user', userLoginRouter)           // Routes Login Webpage 
+app.use('/user', userLoginRouter)                     // Routes Login Webpage 
 
-app.use("/todo", todosRoutes);      //For todo Router Database
+app.use("/todo", todosRoutes);                        //For todo Router Database
+app.use("/todoreport", todosReportRoutes);            //For todo report by pagination
 
-require('./routes/user.route.js')(app)
+require('./routes/user.route.js')(app)                
 
 app.listen(PORT, console.log(`server is running on port ${PORT}`))
