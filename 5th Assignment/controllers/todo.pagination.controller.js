@@ -184,9 +184,44 @@ module.exports.todoTitleName = async (req, res) => {
         });
 };
 
-// Search todo by user
+// Search registered user for Day, Week, Month
 
-module.exports.userForDay = async (req, res) => {
+module.exports.registerUsers = async (req, res) => {
+
+    const timeFrame = req.params.id
+    if (timeFrame.toLowerCase() === "today") {
+        var start = moment(new Date()).format('YYYY-MM-DD')
+        var end = start
+    }
+    if ((timeFrame).toLowerCase() === "week") {
+
+        var start = moment(new Date(moment().subtract(6, 'day'))).format('YYYY-MM-DD')
+        var end = moment(new Date()).format('YYYY-MM-DD')
+    }
+    if (timeFrame.toLowerCase() === "month") {
+        var start = moment(new Date(moment().subtract(29, 'day'))).format('YYYY-MM-DD')
+        var end = moment(new Date()).format('YYYY-MM-DD')
+    }
+
+    const daterange = { '$gte': `${start}T00:00:00.000Z`, '$lt': `${end}T23:59:59.999Z` }
+
+    await TodoModel.find({ "createdAt": daterange })
+        .sort({ createdAt: -1 })                  //Sort data by decending order of updated time stamp 
+        .then((doc) => {
+            if (!doc) {
+                return res.status(404).json("Todo is not available");
+            }
+            return res.status(200).json(doc);
+        })
+        .catch((err) => {
+            res.send({ message: "Please endter time frame as Today, Week, Month " || err.message });
+        });
+
+};
+
+// Search active user for Day, Week, Month
+
+module.exports.activeUsers = async (req, res) => {
 
     const timeFrame = req.params.id
     if (timeFrame.toLowerCase() === "today") {

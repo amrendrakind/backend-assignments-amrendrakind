@@ -9,7 +9,8 @@ const {  createTodo,
   categoryName,
   todoTitle,
   todoTitleName,
-  userForDay
+  registerUsers,
+  activeUsers
 } = require('../controllers/todo.pagination.controller.js')
 
 router.post("/add", createTodo);                    // Adds todos
@@ -24,6 +25,10 @@ router.get("/titlename", todoTitleName);            // get todos by todo title n
 
 //API to get number of registered users for the Day, Week, Month
 
-router.get("/userforday/:id", userForDay);                    // get todos by user  localhost:4000/todoreport/userforday/today or week or month
+router.get("/registerusers/:id", registerUsers);                    // get todos by user  localhost:4000/todoreport/userforday/today or week or month
+
+//API to get number of active users for the Day, Week, Month
+
+router.get("/activeusers/:id", activeUsers);                    // get todos by user  localhost:4000/todoreport/userforday/today or week or month
 
 module.exports = router
