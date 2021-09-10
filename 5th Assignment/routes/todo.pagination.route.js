@@ -22,8 +22,8 @@ router.get("/categoryname", categoryName);          // get todos by Category typ
 router.get("/title", todoTitle);                    // get todos by all todo title  localhost:4000/todoreport/title
 router.get("/titlename", todoTitleName);            // get todos by todo title name  localhost:4000/todoreport/titlename?title=Playing
 
-//API to get number of registered users for the Day
+//API to get number of registered users for the Day, Week, Month
 
-router.get("/userforday", userForDay);                    // get todos by user  // localhost:4000/todoreport/user?name=6134842ba7e60af5a3f35bf8
+router.get("/userforday/:id", userForDay);                    // get todos by user  localhost:4000/todoreport/userforday/today or week or month
 
 module.exports = router
