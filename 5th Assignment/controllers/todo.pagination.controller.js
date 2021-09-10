@@ -13,7 +13,7 @@ module.exports.createTodo = async (req, res) => {
     try {
         const newtodo = new TodoModel(req.body);
         newtodo.save();
-        res.send(newtodo);
+        res.status(200).send(newtodo);
     } catch (err) {
         res.send({ message: err.message });
     }
@@ -184,3 +184,24 @@ module.exports.todoTitleName = async (req, res) => {
         });
 };
 
+/////////
+
+// Search todo by user
+
+module.exports.userForDay = async (req, res) => {
+
+
+    TodoModel.find({ todoTitle: { $exists: true, $ne: null } })
+    .sort( {createdAt :-1})                  //Sort data by creation time stamp 
+    .then((doc) => {
+        if (!doc) {
+            return res.status(404).json("Todo is not available");
+        }
+        return res.status(200).json(doc);
+    })
+    .catch((err) => {
+        res.send({ message: err.message });
+    });
+
+
+};

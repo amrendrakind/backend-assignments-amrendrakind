@@ -8,7 +8,8 @@ const {  createTodo,
   category,
   categoryName,
   todoTitle,
-  todoTitleName
+  todoTitleName,
+  userForDay
 } = require('../controllers/todo.pagination.controller.js')
 
 router.post("/add", createTodo);                    // Adds todos
@@ -20,5 +21,9 @@ router.get("/category", category);                  // get todos by all todo Cat
 router.get("/categoryname", categoryName);          // get todos by Category type  localhost:4000/todoreport/categoryname?name=hobby
 router.get("/title", todoTitle);                    // get todos by all todo title  localhost:4000/todoreport/title
 router.get("/titlename", todoTitleName);            // get todos by todo title name  localhost:4000/todoreport/titlename?title=Playing
+
+//API to get number of registered users for the Day
+
+router.get("/userforday", userForDay);                    // get todos by user  // localhost:4000/todoreport/user?name=6134842ba7e60af5a3f35bf8
 
 module.exports = router
