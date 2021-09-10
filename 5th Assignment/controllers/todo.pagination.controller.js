@@ -186,9 +186,13 @@ module.exports.todoTitleName = async (req, res) => {
 
 // Search registered user for Day, Week, Month
 
-module.exports.registerUsers = async (req, res) => {
+module.exports.registeredUsers = async (req, res) => {
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
 
     const timeFrame = req.params.id
+
     if (timeFrame.toLowerCase() === "today") {
         var start = moment(new Date()).format('YYYY-MM-DD')
         var end = start
@@ -205,25 +209,32 @@ module.exports.registerUsers = async (req, res) => {
 
     const daterange = { '$gte': `${start}T00:00:00.000Z`, '$lt': `${end}T23:59:59.999Z` }
 
-    await TodoModel.find({ "createdAt": daterange })
-        .sort({ createdAt: -1 })                  //Sort data by decending order of updated time stamp 
-        .then((doc) => {
-            if (!doc) {
-                return res.status(404).json("Todo is not available");
-            }
-            return res.status(200).json(doc);
+    TodoModel.paginate({ "createdAt": daterange }, { offset, limit })
+        .then((data) => {
+            res.send({
+                totalItems: data.totalDocs,
+                Todo: data.docs,
+                totalPages: data.totalPages,
+                currentPage: data.page - 1,
+            })
         })
-        .catch((err) => {
-            res.send({ message: "Please endter time frame as Today, Week, Month " || err.message });
-        });
+        .catch((er) => {
+            res.status(500).json({
+                message: "Some error occurred while retrieving registered users." || er.message
 
+            });
+        });
 };
 
 // Search active user for Day, Week, Month
 
 module.exports.activeUsers = async (req, res) => {
 
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
     const timeFrame = req.params.id
+
     if (timeFrame.toLowerCase() === "today") {
         var start = moment(new Date()).format('YYYY-MM-DD')
         var end = start
@@ -240,16 +251,20 @@ module.exports.activeUsers = async (req, res) => {
 
     const daterange = { '$gte': `${start}T00:00:00.000Z`, '$lt': `${end}T23:59:59.999Z` }
 
-    await TodoModel.find({ "updatedAt": daterange })
-        .sort({ updatedAt: -1 })                  //Sort data by decending order of updated time stamp 
-        .then((doc) => {
-            if (!doc) {
-                return res.status(404).json("Todo is not available");
-            }
-            return res.status(200).json(doc);
+    TodoModel.paginate({ "updatedAt": daterange }, { offset, limit })
+        .then((data) => {
+            res.send({
+                totalItems: data.totalDocs,
+                Todo: data.docs,
+                totalPages: data.totalPages,
+                currentPage: data.page - 1,
+            })
         })
-        .catch((err) => {
-            res.send({ message: "Please endter time frame as Today, Week, Month " || err.message });
-        });
+        .catch((er) => {
+            res.status(500).json({
+                message: "Some error occurred while retrieving active users." || er.message
 
+            });
+        });
 };
+
