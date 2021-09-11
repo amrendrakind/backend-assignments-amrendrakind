@@ -31,7 +31,6 @@ module.exports.allTodo = async (req, res) => {
     const { limit, offset } = getPagination(page, size);
 
     TodoModel.paginate(condition, { offset, limit })
-
         .then((data) => {
             res.send({
                 totalItems: data.totalDocs,
@@ -267,4 +266,3 @@ module.exports.activeUsers = async (req, res) => {
             });
         });
 };
-

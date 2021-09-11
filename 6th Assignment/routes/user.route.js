@@ -15,6 +15,4 @@ module.exports = function (app) {
     app.post('/createuser', userControl.register);
     app.post('/login/:name', userControl.login);
     app.get('/alluser/:name', jwtAuth,userControl.getAllUsers);
-
 }
-
