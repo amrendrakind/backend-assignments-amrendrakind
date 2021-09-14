@@ -10,7 +10,8 @@ const {  createTodo,
   category,
   categoryName,
   todoTitle,
-  todoTitleName
+  todoTitleName,
+  todoTask
 } = require('../controllers/todo.controller.js')
 
 router.post("/add", createTodo);                           // Add todos
@@ -28,7 +29,7 @@ router.get("/title", todoTitle);                           // get todos by all t
 router.get("/title/:query", todoTitleName);                // get todos by todo title name
 
 
-router.get("/title/:query", todoTitleName);                // get todos by todo title name
+router.get("/User/:task", todoTask);                // API to get all completed task per Learner
 
 
 

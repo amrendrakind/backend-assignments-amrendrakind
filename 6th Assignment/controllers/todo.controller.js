@@ -166,23 +166,24 @@ module.exports.todoTitleName = async (req, res) => {
     })
 };
 
-// Search todo by user
+//Search todo by user
 
-// module.exports.userTodo = async (req, res) => {
+module.exports.todoTask = async (req, res) => {
   
-//   var query = req.params.query;
-//   const userForTodo= await User.findOne({username:query})
-//   console.log(userForTodo._id.toString())
-//   await TodoModel.find({userName: userForTodo._id.toString()})
-//     .select("userName category todoTitle isComplete status")
-//     .exec()
-//     .then((doc) => {
-//       if (!doc) {
-//         return res.status(404).json("User not available in Todo List");
-//       }
-//       return res.status(200).json(doc);
-//     })
-//     .catch((err) => {
-//       res.send({ message: err.message });
-//     });
-// };
+  var query = req.params.query;
+  
+  const userForTodo= await User.findOne({username:query})
+  console.log(userForTodo._id.toString())
+  await TodoModel.find({userName: userForTodo._id.toString()})
+    .select("userName category todoTitle isComplete status")
+    .exec()
+    .then((doc) => {
+      if (!doc) {
+        return res.status(404).json("User not available in Todo List");
+      }
+      return res.status(200).json(doc);
+    })
+    .catch((err) => {
+      res.send({ message: err.message });
+    });
+};
