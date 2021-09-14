@@ -1,4 +1,6 @@
+const User = require('../models/user.model.js')
 const TodoModel = require('../models/todo.model.js')
+
 //create new todo
 module.exports.createTodo = async (req, res) => {
     try {
@@ -164,3 +166,23 @@ module.exports.todoTitleName = async (req, res) => {
     })
 };
 
+// Search todo by user
+
+// module.exports.userTodo = async (req, res) => {
+  
+//   var query = req.params.query;
+//   const userForTodo= await User.findOne({username:query})
+//   console.log(userForTodo._id.toString())
+//   await TodoModel.find({userName: userForTodo._id.toString()})
+//     .select("userName category todoTitle isComplete status")
+//     .exec()
+//     .then((doc) => {
+//       if (!doc) {
+//         return res.status(404).json("User not available in Todo List");
+//       }
+//       return res.status(200).json(doc);
+//     })
+//     .catch((err) => {
+//       res.send({ message: err.message });
+//     });
+// };

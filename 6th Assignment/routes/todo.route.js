@@ -28,6 +28,7 @@ router.get("/title", todoTitle);                           // get todos by all t
 router.get("/title/:query", todoTitleName);                // get todos by todo title name
 
 
+router.get("/title/:query", todoTitleName);                // get todos by todo title name
 
 
 
